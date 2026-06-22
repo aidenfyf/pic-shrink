@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0d1117" />
+  <title>Pic Shrink — shrink screenshots, in your browser</title>
+  <meta name="description" content="Shrink iPhone screenshots to under 1MB. Runs entirely in your browser — your images never get uploaded anywhere." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="wrap">
+    <header class="hero">
+      <h1>Pic&nbsp;Shrink</h1>
+      <p class="tagline">Make big screenshots tiny — right here on your device.</p>
+      <p class="privacy">🔒 Your images <strong>never leave this page</strong>. No upload, no server, no account. Works offline.</p>
+    </header>
+
+    <section class="controls" aria-label="Compression settings">
+      <div class="control">
+        <label for="quality">Quality <output id="qualityOut">80%</output></label>
+        <input type="range" id="quality" min="50" max="99" value="80" step="1" />
+        <small>Higher = clearer & bigger. 75–85% is the sweet spot.</small>
+      </div>
+
+      <div class="control">
+        <label class="switch-row">
+          <input type="checkbox" id="targetOn" checked />
+          <span>Aim for under</span>
+          <input type="number" id="targetMB" min="0.1" max="20" step="0.1" value="1" class="num" />
+          <span>MB</span>
+        </label>
+        <small>We'll auto-tune quality &amp; size to fit. Unchecked = use exact quality above.</small>
+      </div>
+
+      <div class="control">
+        <label for="format">Format</label>
+        <select id="format">
+          <option value="auto" selected>Auto (smallest)</option>
+          <option value="image/jpeg">JPEG — most compatible</option>
+          <option value="image/webp">WebP — smaller files</option>
+          <option value="image/png">PNG — lossless (won't shrink much)</option>
+        </select>
+        <small>Screenshots are usually PNG; converting to JPEG/WebP is what makes them small.</small>
+      </div>
+    </section>
+
+    <label id="drop" class="dropzone" tabindex="0">
+      <input type="file" id="picker" accept="image/*" multiple hidden />
+      <div class="drop-inner">
+        <div class="drop-icon">⬇️</div>
+        <div class="drop-text"><strong>Tap to choose photos</strong> or drag &amp; drop here</div>
+        <div class="drop-sub">You can also paste an image (⌘V)</div>
+      </div>
+    </label>
+
+    <section id="results" class="results" hidden>
+      <div class="results-head">
+        <div id="summary" class="summary"></div>
+        <button id="downloadAll" class="btn btn-primary">Download all</button>
+      </div>
+      <ul id="list" class="list"></ul>
+    </section>
+
+    <footer class="foot">
+      <p>100% client-side. <a href="https://github.com/aidenfyf" rel="noopener">Built to be read</a> — open the files and see for yourself.</p>
+    </footer>
+  </main>
+
+  <template id="card-tpl">
+    <li class="card">
+      <div class="thumb"><img alt="" /></div>
+      <div class="meta">
+        <div class="name" title=""></div>
+        <div class="sizes">
+          <span class="orig"></span>
+          <span class="arrow">→</span>
+          <span class="new"></span>
+          <span class="saved"></span>
+        </div>
+        <div class="dims"></div>
+        <div class="status">Compressing…</div>
+      </div>
+      <div class="card-actions">
+        <button class="btn btn-small download" disabled>Download</button>
+      </div>
+    </li>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
