@@ -2,6 +2,10 @@
 
 Shrink big iPhone screenshots (and any image) from 5–10 MB down to **under 1 MB** — without paying Adobe and without handing your photos to a sketchy website.
 
+**▶︎ Live: [pic-shrink.vercel.app](https://pic-shrink.vercel.app)**
+
+![Pic Shrink — a privacy-first image compressor that runs entirely in your browser](assets/pic-shrink.png)
+
 **Everything happens in your browser.** Your images are never uploaded, never sent to a server, never seen by anyone but you. You can turn off wifi and it still works. The whole thing is ~3 small files you can read yourself.
 
 ## How it works
@@ -44,7 +48,8 @@ Deploy by dropping the folder on any static host (GitHub Pages, Netlify, Vercel,
 | `index.html` | The page & layout |
 | `style.css` | Styling (dark, mobile-first) |
 | `app.js` | All the compression logic — fully client-side |
+| `fonts/` | Self-hosted Mona Sans + Hubot Sans (no CDN — keeps it offline & private) |
 
 ## License
 
-MIT
+[MIT](LICENSE) © 2026 Aiden Frazier — do whatever you like, just keep the notice. (Bundled fonts are SIL OFL 1.1.)
