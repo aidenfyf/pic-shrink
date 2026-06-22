@@ -7,6 +7,8 @@
   <title>Pic Shrink — shrink screenshots, in your browser</title>
   <meta name="description" content="Shrink iPhone screenshots to under 1MB. Runs entirely in your browser — your images never get uploaded anywhere." />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🗜️%3C/text%3E%3C/svg%3E" />
+  <link rel="preload" href="fonts/MonaSans.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="fonts/HubotSans-ExtraBold.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -49,9 +51,18 @@
     <label id="drop" class="dropzone" tabindex="0">
       <input type="file" id="picker" accept="image/*" multiple hidden />
       <div class="drop-inner">
-        <div class="drop-icon">⬇️</div>
-        <div class="drop-text"><strong>Tap to choose photos</strong> or drag &amp; drop here</div>
-        <div class="drop-sub">You can also paste an image (⌘V)</div>
+        <span class="drop-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="3" />
+            <circle cx="8.5" cy="8.5" r="1.6" />
+            <path d="M3 16l4.5-4.5 4 4 3.5-3.5L21 16" />
+          </svg>
+        </span>
+        <span class="drop-copy">
+          <span class="drop-text">Tap to choose photos</span>
+          <span class="drop-sub">or drag &amp; drop · paste (⌘V) · several at once</span>
+          <span class="drop-sample">e.g. <span class="ex-from">5.2&nbsp;MB</span> → <span class="ex-to">0.4&nbsp;MB</span></span>
+        </span>
       </div>
     </label>
 
