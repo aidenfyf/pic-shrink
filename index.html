@@ -58,12 +58,16 @@
     <section id="results" class="results" hidden>
       <div class="results-head">
         <div id="summary" class="summary"></div>
-        <button id="downloadAll" class="btn btn-primary">Download all</button>
+        <div class="results-actions">
+          <button id="clearAll" class="btn" type="button">Clear all</button>
+          <button id="downloadAll" class="btn btn-primary" type="button">Download all</button>
+        </div>
       </div>
       <ul id="list" class="list"></ul>
     </section>
 
     <footer class="foot">
+      <p class="disclaimer">🔒 Privacy first — your images are never uploaded, saved, or stored on any server. Choosing, shrinking, and downloading all happen entirely inside your own browser session, visible only to you. Nothing leaves your device, and nothing is kept once you close the tab.</p>
       <p>100% client-side. <a href="https://github.com/aidenfyf" rel="noopener">Built to be read</a> — open the files and see for yourself.</p>
     </footer>
   </main>
@@ -87,6 +91,17 @@
       </div>
     </li>
   </template>
+
+  <div id="confirmModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="confirmTitle" hidden>
+    <div class="modal-card">
+      <h2 id="confirmTitle">Clear all images?</h2>
+      <p>This removes the images below from the page. Your settings stay — and since nothing was ever uploaded, the originals on your device are untouched.</p>
+      <div class="modal-actions">
+        <button id="confirmCancel" class="btn" type="button">Cancel</button>
+        <button id="confirmClear" class="btn btn-danger" type="button">Clear all</button>
+      </div>
+    </div>
+  </div>
 
   <script src="app.js"></script>
 </body>

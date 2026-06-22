@@ -195,3 +195,43 @@ select {
 .foot { text-align: center; color: var(--muted); font-size: 0.8rem; margin-top: 30px; }
 .foot a { color: var(--link); text-decoration: none; }
 .foot a:hover { text-decoration: underline; }
+
+/* Privacy disclaimer */
+.disclaimer {
+  max-width: 60ch;
+  margin: 0 auto 12px;
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+/* Results action group */
+.results-actions { display: flex; gap: 10px; flex: 0 0 auto; }
+
+/* Confirm modal */
+.modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(1, 4, 9, 0.66);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+  z-index: 50;
+}
+.modal.show { display: flex; }
+.modal-card {
+  width: 100%;
+  max-width: 380px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+.modal-card h2 { margin: 0 0 8px; font-size: 1.15rem; }
+.modal-card p { margin: 0 0 18px; color: var(--muted); font-size: 0.9rem; line-height: 1.5; }
+.modal-actions { display: flex; justify-content: flex-end; gap: 10px; }
+.btn-danger { background: #b62324; border-color: #b62324; color: #fff; }
+.btn-danger:hover { background: #cf3436; }

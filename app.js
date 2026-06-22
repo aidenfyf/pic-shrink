@@ -21,6 +21,10 @@ const els = {
   list: $('#list'),
   summary: $('#summary'),
   downloadAll: $('#downloadAll'),
+  clearAll: $('#clearAll'),
+  confirmModal: $('#confirmModal'),
+  confirmCancel: $('#confirmCancel'),
+  confirmClear: $('#confirmClear'),
   tpl: $('#card-tpl'),
 };
 
@@ -242,6 +246,7 @@ async function addFiles(fileList) {
     node.querySelector('.download').addEventListener('click', () => download(job));
 
     const thumbUrl = URL.createObjectURL(file);
+    job.thumbUrl = thumbUrl;
     node.querySelector('.thumb img').src = thumbUrl;
 
     els.list.appendChild(node);
@@ -264,6 +269,40 @@ function rerunAll() {
   reRunTimer = setTimeout(() => {
     jobs.forEach((j) => { if (j.source) runJob(j); });
   }, 250);
+}
+
+/* ---------- clear / reset ---------- */
+
+function openConfirm() {
+  els.confirmModal.hidden = false;
+  els.confirmModal.classList.add('show');
+  els.confirmCancel.focus();
+  document.addEventListener('keydown', onConfirmKey);
+}
+
+function closeConfirm() {
+  els.confirmModal.classList.remove('show');
+  els.confirmModal.hidden = true;
+  document.removeEventListener('keydown', onConfirmKey);
+  els.clearAll.focus();
+}
+
+function onConfirmKey(e) {
+  if (e.key === 'Escape') closeConfirm();
+}
+
+// Wipe the batch: free image memory (object URLs + decoded bitmaps), reset the UI.
+// Settings are intentionally left as-is so the next batch uses the same prefs.
+function clearAll() {
+  jobs.forEach((j) => {
+    if (j.thumbUrl) URL.revokeObjectURL(j.thumbUrl);
+    if (j.source && typeof j.source.close === 'function') j.source.close();
+  });
+  jobs.length = 0;
+  els.list.innerHTML = '';
+  els.summary.innerHTML = '';
+  els.downloadAll.disabled = true;
+  els.results.hidden = true;
 }
 
 /* ---------- wiring ---------- */
@@ -297,4 +336,11 @@ window.addEventListener('paste', (e) => {
 
 els.downloadAll.addEventListener('click', () => {
   jobs.filter((j) => j.result).forEach((j, i) => setTimeout(() => download(j), i * 250));
+});
+
+els.clearAll.addEventListener('click', openConfirm);
+els.confirmCancel.addEventListener('click', closeConfirm);
+els.confirmClear.addEventListener('click', () => { clearAll(); closeConfirm(); });
+els.confirmModal.addEventListener('click', (e) => {
+  if (e.target === els.confirmModal) closeConfirm();
 });
